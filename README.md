@@ -36,6 +36,12 @@ Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
 
 ## Uso 
 Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+```
+	python3 -m venv .pv
+	&& source .pv/bin/activate
+	&& pip3 install requirements.txt
+	&& python3 main.py
+```
 
 ## Outros 
 Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
