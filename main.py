@@ -1,6 +1,6 @@
 import pygame
 import random
-
+from algorithms import *
 
 class Player(pygame.sprite.Sprite):
 
@@ -30,6 +30,7 @@ class Player(pygame.sprite.Sprite):
             self.direction = direction
 
 
+
 pygame.init()
 
 x = 1280
@@ -44,11 +45,34 @@ bg = pygame.transform.scale(bg, (x, y))
 alien = pygame.image.load('images/alien.png').convert_alpha()
 alien = pygame.transform.scale(alien, (50, 50))
 
+alien2 = pygame.image.load('images/alien.png').convert_alpha()
+alien2 = pygame.transform.scale(alien2, (50, 50))
+
+alien3 = pygame.image.load('images/alien.png').convert_alpha()
+alien3 = pygame.transform.scale(alien3, (50, 50))
+
+alien4 = pygame.image.load('images/alien.png').convert_alpha()
+alien4 = pygame.transform.scale(alien4, (50, 50))
+
 pos_player_x = 200
 pos_player_y = 300
 
 pos_alien_x = random.randint(1, 1200)
 pos_alien_y = random.randint(1, 640)
+
+pos_alien2_x = random.randint(1, 1200)
+pos_alien2_y = random.randint(1, 640)
+
+pos_alien3_x = random.randint(1, 1300)
+pos_alien3_y = random.randint(1, 630)
+
+pos_alien4_x = random.randint(1, 1200)
+pos_alien4_y = random.randint(1, 640)
+
+P = [(pos_alien_x,pos_alien_y), (pos_alien2_x,pos_alien2_y), (pos_alien3_x,pos_alien3_y), (pos_alien4_x,pos_alien4_y)]
+close = closest(P)
+
+print(close)
 
 play = True
 player = Player()
@@ -57,15 +81,20 @@ points=0
 
 player_rect = player.current_image.get_rect()
 alien_rect = alien.get_rect()
+alien2_rect = alien2.get_rect()
+alien3_rect = alien3.get_rect()
+alien4_rect = alien4.get_rect()
+
+
+
 
 def colisions():
     global points
-    if player_rect.colliderect(alien_rect):
+    if player_rect.colliderect(alien_rect) or player_rect.colliderect(alien2_rect) or player_rect.colliderect(alien3_rect) or player_rect.colliderect(alien4_rect):
         points +=1
         return True
     else:
         return False
-print(pygame.font.get_fonts())
 
 while play:
     for event in pygame.event.get():
@@ -98,18 +127,38 @@ while play:
         pos_player_x -= 1
         player.swap(direction=3)
 
- 
-
     player_rect.y= pos_player_y
     player_rect.x= pos_player_x
 
     alien_rect.y= pos_alien_y
     alien_rect.x= pos_alien_x
 
+    alien2_rect.y= pos_alien2_y
+    alien2_rect.x= pos_alien2_x
+
+    alien3_rect.y= pos_alien3_y
+    alien3_rect.x= pos_alien3_x
+
+    alien4_rect.y= pos_alien4_y
+    alien4_rect.x= pos_alien4_x
+
     if colisions():
         pos_alien_x = random.randint(1, 1200)
         pos_alien_y = random.randint(1, 640)
 
+        pos_alien2_x = random.randint(1, 1200)
+        pos_alien2_y = random.randint(1, 640)
+
+        pos_alien3_x = random.randint(1, 1200)
+        pos_alien3_y = random.randint(1, 640)
+
+        pos_alien4_x = random.randint(1, 1200)
+        pos_alien4_y = random.randint(1, 640)
+
+        P = [(pos_alien_x,pos_alien_y), (pos_alien2_x,pos_alien2_y), (pos_alien3_x,pos_alien3_y), (pos_alien4_x,pos_alien4_y)]
+        close = closest(P)
+        
+       
     x -= 0.5 #Background Movement
     
     font = pygame.font.Font('freesansbold.ttf', 50)
@@ -117,9 +166,35 @@ while play:
     screen.blit(score,(50,50))
 
     pygame.draw.rect(screen,(255,0,0), player_rect,4)
-    pygame.draw.rect(screen,(255,0,0), alien_rect,4)
+
+    if close[0][0] == pos_alien_x and close[0][1] == pos_alien_y:
+        pygame.draw.rect(screen,(255,0,0), alien_rect,4)
+
+    elif close[0][0] == pos_alien2_x and close[0][1] == pos_alien2_y:
+        pygame.draw.rect(screen,(255,0,0), alien2_rect,4)
+
+    elif close[0][0] == pos_alien3_x and close[0][1] == pos_alien3_y:
+        pygame.draw.rect(screen,(255,0,0), alien3_rect,4)
+
+    elif close[0][0] == pos_alien4_x and close[0][1] == pos_alien4_y:
+        pygame.draw.rect(screen,(255,0,0), alien4_rect,4)
+
+    if close[1][0] == pos_alien_x and close[1][1] == pos_alien_y:
+        pygame.draw.rect(screen,(255,0,0), alien_rect,4)
+
+    elif close[1][0] == pos_alien2_x and close[1][1] == pos_alien2_y:
+        pygame.draw.rect(screen,(255,0,0), alien2_rect,4)
+
+    elif close[1][0] == pos_alien3_x and close[1][1] == pos_alien3_y:
+        pygame.draw.rect(screen,(255,0,0), alien3_rect,4)
+
+    elif close[1][0] == pos_alien4_x and close[1][1] == pos_alien4_y:
+        pygame.draw.rect(screen,(255,0,0), alien4_rect,4)
 
     screen.blit(player.current_image, (pos_player_x, pos_player_y))
     screen.blit(alien, (pos_alien_x, pos_alien_y))
+    screen.blit(alien2, (pos_alien2_x, pos_alien2_y))
+    screen.blit(alien3, (pos_alien3_x, pos_alien3_y))
+    screen.blit(alien4, (pos_alien4_x, pos_alien4_y))
 
     pygame.display.update()
