@@ -47,6 +47,7 @@ pygame.init()
 
 x = 1280
 y = 720
+font = pygame.font.Font('fonts/Pixellari.ttf', 50,)
 
 screen = pygame.display.set_mode((x, y))
 pygame.display.set_caption("Navezinha")
@@ -93,6 +94,7 @@ close = closest(P)
 print(close)
 
 play = True
+game_over= False
 player = Player()
 
 points=0
@@ -118,7 +120,48 @@ def respawnMissile():
     vel_missile_y = 0
     return [respawn_missile_x, respawn_missile_y, vel_missile_x, vel_missile_y]
 
+def game_over_screen():
+    screen.blit(bg, (0, 0))   
+    title = font.render('Game Over',True,(0,0,0))
+    pontos = font.render(f'Pontuação: {int(points)}',True,(0,0,0))
+    text = font.render(f'Pressione "r" para jogar novamente',True,(0,0,0))
+
+    screen.blit(title,(1280/4,720/4))
+    screen.blit(pontos,(1280/4,720 /2))
+    screen.blit(text,(1280/4,720 *3 / 4))
+    pygame.display.flip()
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            key = pygame.key.get_pressed()
+            if key[pygame.K_r]:
+                waiting= False
+
+
 while play:
+    if game_over:
+        game_over_screen()
+        game_over= False
+        points=0
+        pos_player_x = 200
+        pos_player_y = 300
+        vel_missile_x = 0
+        vel_missile_y = 0
+        pos_missile_x = 200
+        pos_missile_y = 300
+        pos_alien_x = random.randint(1, 1200)
+        pos_alien_y = random.randint(1, 640)
+        pos_alien2_x = random.randint(1, 1200)
+        pos_alien2_y = random.randint(1, 640)
+        pos_alien3_x = random.randint(1, 1200)
+        pos_alien3_y = random.randint(1, 630)
+        pos_alien4_x = random.randint(1, 1200)
+        pos_alien4_y = random.randint(1, 640)
+        P = [(pos_alien_x,pos_alien_y), (pos_alien2_x,pos_alien2_y), (pos_alien3_x,pos_alien3_y), (pos_alien4_x,pos_alien4_y)]
+        close = closest(P)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             play = False
@@ -156,15 +199,16 @@ while play:
         if not player.triggered:
             pos_missile_x -= 1
     if key[pygame.K_SPACE]:
-        player.triggered = True
-        if player.direction ==0 and player.triggered == True:
-            vel_missile_y = -1
-        if player.direction ==1 and player.triggered == True:
-            vel_missile_y = 1
-        if player.direction ==2 and player.triggered == True:
-            vel_missile_x = 1
-        if player.direction ==3 and player.triggered == True:
-            vel_missile_x = -1
+        if player.triggered == False:
+            player.triggered = True
+            if player.direction ==0 and player.triggered == True:
+                vel_missile_y = -2
+            if player.direction ==1 and player.triggered == True:
+                vel_missile_y = 2
+            if player.direction ==2 and player.triggered == True:
+                vel_missile_x = 2
+            if player.direction ==3 and player.triggered == True:
+                vel_missile_x = -2
 
     player_rect.y= pos_player_y
     player_rect.x= pos_player_x
@@ -185,35 +229,66 @@ while play:
     alien4_rect.x= pos_alien4_x
 
 
-    if player_rect.colliderect(alien_rect) or missile_rect.colliderect(alien_rect):
+    if missile_rect.colliderect(alien_rect) and (pos_missile_x != pos_player_x or pos_missile_y!= pos_player_y):
+        P = [(pos_alien_x,pos_alien_y), (pos_alien2_x,pos_alien2_y), (pos_alien3_x,pos_alien3_y), (pos_alien4_x,pos_alien4_y)]
         P.remove((pos_alien_x,pos_alien_y))
-        points +=1
+        if(close[0] != None):
+            if (close[0][0] == pos_alien_x and close[0][1] == pos_alien_y) or (close[1][0] == pos_alien_x and close[1][1] == pos_alien_y):
+                points +=1
+            else: 
+                points -=1
+        else:
+            points +=1
         pos_alien_x = -100
         pos_alien_y = -100
         close = closest(P)
 
-    if player_rect.colliderect(alien2_rect) or missile_rect.colliderect(alien2_rect):
+    if missile_rect.colliderect(alien2_rect) and (pos_missile_x != pos_player_x or pos_missile_y!= pos_player_y):
         P.remove((pos_alien2_x,pos_alien2_y))
-        points +=1
+        if(close[0] != None):
+            if (close[0][0] == pos_alien2_x and close[0][1] == pos_alien2_y) or (close[1][0] == pos_alien2_x and close[1][1] == pos_alien2_y):
+                points +=1
+            else: 
+                points -=1
+        else:
+            points +=1
         pos_alien2_x = -100
         pos_alien2_y = -100
         close = closest(P)
 
-    if player_rect.colliderect(alien3_rect) or missile_rect.colliderect(alien3_rect): 
+    if missile_rect.colliderect(alien3_rect) and (pos_missile_x != pos_player_x or pos_missile_y!= pos_player_y): 
         P.remove((pos_alien3_x,pos_alien3_y))
-        points +=1
+        print(close)
+        if(close[0] != None):
+            if (close[0][0] == pos_alien3_x and close[0][1] == pos_alien3_y) or (close[1][0] == pos_alien3_x and close[1][1] == pos_alien3_y):
+                points +=1
+            else: 
+                points -=1
+        else:
+            points +=1
         pos_alien3_x = -100
         pos_alien3_y = -100
         close = closest(P)
 
-    if player_rect.colliderect(alien4_rect) or missile_rect.colliderect(alien4_rect):
+    if missile_rect.colliderect(alien4_rect) and (pos_missile_x != pos_player_x or pos_missile_y!= pos_player_y):
         P.remove((pos_alien4_x,pos_alien4_y))
-        points +=1
+        if(close[0] != None):
+            if (close[0][0] == pos_alien4_x and close[0][1] == pos_alien4_y) or (close[1][0] == pos_alien4_x and close[1][1] == pos_alien4_y):
+                points +=1
+            else: 
+                points -=1
+        else:
+            points +=1
         pos_alien4_x = -100
         pos_alien4_y = -100
         close = closest(P)
+
+    if player_rect.colliderect(alien_rect) or player_rect.colliderect(alien2_rect) or player_rect.colliderect(alien3_rect) or player_rect.colliderect(alien4_rect):
+        game_over= True
+   
         
-    if pos_missile_x == 1300 or pos_missile_x ==0 or pos_missile_y ==0 or pos_missile_y == 750 or missile_rect.colliderect(alien_rect) or missile_rect.colliderect(alien2_rect) or missile_rect.colliderect(alien3_rect) or missile_rect.colliderect(alien4_rect):
+        
+    if pos_missile_x >= 1280 or pos_missile_x <=0 or pos_missile_y <0 or pos_missile_y >= 720 or missile_rect.colliderect(alien_rect) or missile_rect.colliderect(alien2_rect) or missile_rect.colliderect(alien3_rect) or missile_rect.colliderect(alien4_rect):
         pos_missile_x, pos_missile_y, vel_missile_x, vel_missile_y = respawnMissile()
 
     if pos_alien_x ==-100 and pos_alien2_x ==-100 and pos_alien3_x ==-100 and pos_alien4_x ==-100:
@@ -231,13 +306,13 @@ while play:
 
         P = [(pos_alien_x,pos_alien_y), (pos_alien2_x,pos_alien2_y), (pos_alien3_x,pos_alien3_y), (pos_alien4_x,pos_alien4_y)]
         close = closest(P)
-        
+
+
     pos_missile_x += vel_missile_x  
     pos_missile_y += vel_missile_y
     x -= 0.5 #Background Movement
     
     
-    font = pygame.font.Font('freesansbold.ttf', 50)
     score = font.render(f'Score: {int(points)}',True,(0,0,0))
     screen.blit(score,(50,50))
 
