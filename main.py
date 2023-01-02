@@ -4,6 +4,14 @@ from algorithms import *
 from pygame import mixer
 from menu import openMenu
 
+def respawn():
+    x = random.randint(1, 1200)
+    y = random.randint(80, 640)
+    if x == pos_player_x:
+        x += 100
+    if y == pos_player_y:
+        y += 100
+    return [x, y]
 
 class Player(pygame.sprite.Sprite):
 
@@ -99,17 +107,17 @@ vel_missile_y = 0
 pos_missile_x = 200
 pos_missile_y = 300
 
-pos_alien_x = random.randint(1, 1200)
-pos_alien_y = random.randint(1, 640)
+pos_alien_x = respawn()[0]
+pos_alien_y = respawn()[1]
 
-pos_alien2_x = random.randint(1, 1200)
-pos_alien2_y = random.randint(1, 640)
+pos_alien2_x = respawn()[0]
+pos_alien2_y = respawn()[1]
 
-pos_alien3_x = random.randint(1, 1200)
-pos_alien3_y = random.randint(1, 630)
+pos_alien3_x = respawn()[0]
+pos_alien3_y = respawn()[1]
 
-pos_alien4_x = random.randint(1, 1200)
-pos_alien4_y = random.randint(1, 640)
+pos_alien4_x = respawn()[0]
+pos_alien4_y = respawn()[1]
 
 P = [(pos_alien_x, pos_alien_y), (pos_alien2_x, pos_alien2_y),
      (pos_alien3_x, pos_alien3_y), (pos_alien4_x, pos_alien4_y)]
@@ -127,12 +135,6 @@ alien_rect = alien.get_rect()
 alien2_rect = alien2.get_rect()
 alien3_rect = alien3.get_rect()
 alien4_rect = alien4.get_rect()
-
-
-def respawn():
-    x = random.randint(1, 1200)
-    y = random.randint(1, 640)
-    return [x, y]
 
 
 def respawnMissile():
@@ -170,14 +172,14 @@ while play:
         vel_missile_y = 0
         pos_missile_x = 200
         pos_missile_y = 300
-        pos_alien_x = random.randint(1, 1200)
-        pos_alien_y = random.randint(80, 640)
-        pos_alien2_x = random.randint(1, 1200)
-        pos_alien2_y = random.randint(80, 640)
-        pos_alien3_x = random.randint(1, 1200)
-        pos_alien3_y = random.randint(80, 630)
-        pos_alien4_x = random.randint(1, 1200)
-        pos_alien4_y = random.randint(80, 640)
+        pos_alien_x = respawn()[0]
+        pos_alien_y = respawn()[1]
+        pos_alien2_x = respawn()[0]
+        pos_alien2_y = respawn()[1]
+        pos_alien3_x = respawn()[0]
+        pos_alien3_y = respawn()[1]
+        pos_alien4_x = respawn()[0]
+        pos_alien4_y = respawn()[1]
         P = [(pos_alien_x, pos_alien_y), (pos_alien2_x, pos_alien2_y),
              (pos_alien3_x, pos_alien3_y), (pos_alien4_x, pos_alien4_y)]
         close = closest(P)
@@ -195,39 +197,39 @@ while play:
 
     key = pygame.key.get_pressed()
     if key[pygame.K_UP] and pos_player_y > 1:
-        pos_player_y -= 1
+        pos_player_y -= 2
         player.swap(direction=0)
         if not player.triggered:
-            pos_missile_y -= 1
+            pos_missile_y -= 2
 
     if key[pygame.K_DOWN] and pos_player_y < 665:
-        pos_player_y += 1
+        pos_player_y += 2
         player.swap(direction=1)
         if not player.triggered:
-            pos_missile_y += 1
+            pos_missile_y += 2
 
     if key[pygame.K_RIGHT] and pos_player_x < 1225:
-        pos_player_x += 1
+        pos_player_x += 2
         player.swap(direction=2)
         if not player.triggered:
-            pos_missile_x += 1
+            pos_missile_x += 2
 
     if key[pygame.K_LEFT] and pos_player_x > 1:
-        pos_player_x -= 1
+        pos_player_x -= 2
         player.swap(direction=3)
         if not player.triggered:
-            pos_missile_x -= 1
+            pos_missile_x -= 2
     if key[pygame.K_SPACE]:
         if player.triggered == False:
             player.triggered = True
             if player.direction == 0 and player.triggered == True:
-                vel_missile_y = -2
+                vel_missile_y = -4
             if player.direction == 1 and player.triggered == True:
-                vel_missile_y = 2
+                vel_missile_y = 4
             if player.direction == 2 and player.triggered == True:
-                vel_missile_x = 2
+                vel_missile_x = 4
             if player.direction == 3 and player.triggered == True:
-                vel_missile_x = -2
+                vel_missile_x = -4
 
     player_rect.y = pos_player_y
     player_rect.x = pos_player_x
