@@ -1,10 +1,10 @@
+import random
 import tkinter as tk
 from PIL import ImageTk, Image
 from algorithms import calculateInversions
 
 def openMenu():
   class Drag_and_Drop_Listbox(tk.Listbox):
-    """ A tk listbox with drag'n'drop reordering of entries. """
     def __init__(self, master, **kw):
       kw['selectmode'] = tk.MULTIPLE
       kw['activestyle'] = 'none'
@@ -20,21 +20,17 @@ def openMenu():
       self.currentOrder = list
       root.destroy()
     def setCurrent(self, event):
-      ''' gets the current index of the clicked item in the listbox '''
       self.curIndex = self.nearest(event.y)
     def getState(self, event):
-      ''' checks if the clicked item in listbox is selected '''
       i = self.nearest(event.y)
       self.curState = self.selection_includes(i)
     def shiftSelection(self, event):
-      ''' shifts item up or down in listbox '''
       i = self.nearest(event.y)
       if self.curState == 1:
         self.selection_set(self.curIndex)
       else:
         self.selection_clear(self.curIndex)
       if i < self.curIndex:
-        # Moves up
         x = self.get(i)
         selected = self.selection_includes(i)
         self.delete(i)
@@ -43,7 +39,6 @@ def openMenu():
           self.selection_set(i+1)
         self.curIndex = i
       elif i > self.curIndex:
-        # Moves down
         x = self.get(i)
         selected = self.selection_includes(i)
         self.delete(i)
@@ -57,13 +52,16 @@ def openMenu():
   root.title("Escolha Musical!")
 
   listbox = Drag_and_Drop_Listbox(root, font=('Script', 12))
-  label = tk.Label(root, text="Antes de começarmos", font=('Arial', 18))
+  label = tk.Label(root, text="Antes de começarmos o jogo, classifique os doze instrumentos musicais abaixo do que mais gosta (no topo) para o que menos gosta (no final) para escolhermos uma trilha sonora para o seu jogo usando o cálculo de inversões!", font=('Arial', 14), wraplength=700, justify="center")
 
-  img = ImageTk.PhotoImage(Image.open("./images/spaceinvaderslogo.png"))
+  img = ImageTk.PhotoImage(Image.open("./images/logo.png"))
   panel = tk.Label(root, image = img)
   panel.pack(side = "top")
 
-  label.pack(pady=20)
+  label.pack(pady=5)
+
+  instructions = tk.Label(root, text="Clique e arraste cada instrumento para a ordem desejada.", font=('Arial', 10), wraplength=700, justify="center")
+  instructions.pack(pady=5)
 
   bossanova = [
     'Violão'
@@ -179,8 +177,10 @@ def openMenu():
     , 'Guitarra'
   ]
 
+  shuffled = random.sample(instruments, len(instruments))
+
   i = 0
-  for name in instruments:
+  for name in shuffled:
       listbox.insert(tk.END, name)
       if i % 2 == 0:
           listbox.selection_set(i)
@@ -188,7 +188,7 @@ def openMenu():
 
   listbox.pack(fill=tk.BOTH, expand=True, padx=30, pady=30)
 
-  btn=tk.Button(root, text="CONTINUAR", fg='blue', command=listbox.showOrder)
+  btn=tk.Button(root, text="CONTINUAR", bg='#6dc62e', fg='#266116', command=listbox.showOrder, height=2, width=15)
   btn.pack(padx=20, pady=20)
   root.mainloop()
 

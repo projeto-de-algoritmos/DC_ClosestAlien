@@ -46,12 +46,10 @@ def medianOfMedians(choices, k):
 		return medianOfMedians(choices[start + 1:len(choices)], k - start - 1)
 
 # vetor = [2,5,9,19,24,54,5,87,9,10,44,32,18,13,2,4,23,26,16,19,25,39,47,56,71]
-vetor = [(random.random()*100*random.random()*100*random.random()*100) for i in range(1000000)]
-print('Mediana Real: ', sorted(vetor)[len(vetor)//2])
-mm = medianOfMedians(vetor, len(vetor)//2)
-print('Mediana Oráculo: ', mm)
-
-
+# vetor = [(random.random()*100*random.random()*100*random.random()*100) for i in range(1000000)]
+# print('Mediana Real: ', sorted(vetor)[len(vetor)//2])
+# mm = medianOfMedians(vetor, len(vetor)//2)
+# print('Mediana Oráculo: ', mm)
 
 
 def euclidianDistance(A, B):
