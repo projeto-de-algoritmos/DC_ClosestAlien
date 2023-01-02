@@ -42,7 +42,6 @@ class Player(pygame.sprite.Sprite):
             self.direction = direction
 
 
-
 pygame.init()
 
 x = 1280
@@ -238,7 +237,7 @@ while play:
     
     
     font = pygame.font.Font('freesansbold.ttf', 50)
-    score = font.render(f'Score: {int(points)}',True,(0,0,0))
+    score = font.render(f'SCORE: {int(points)}',True,(0,0,0))
     screen.blit(score,(50,50))
 
     pygame.draw.rect(screen,(255,0,0), player_rect,4)

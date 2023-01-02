@@ -149,27 +149,27 @@ def merge(choices, aux, start, mid, end):
           
     return inversions_counter
   
-instrumentos = [
-    'baixo'
-    , 'bateria'
-    , 'violão'
-    , 'guitarra'
-    , 'violino'
-]
-choices = []
-for i in range(5):
-    print(f'O quanto você gosta de {instrumentos[i]}?')
-    choices.append(input())
+# instrumentos = [
+#     'baixo'
+#     , 'bateria'
+#     , 'violão'
+#     , 'guitarra'
+#     , 'violino'
+# ]
+# choices = []
+# for i in range(5):
+#     print(f'O quanto você gosta de {instrumentos[i]}?')
+#     choices.append(input())
 
-rock = [3,2,4,1,5]
-ri = inversions(rock, copy.copy(rock), 0, len(rock)-1)
-bossanova = [3,5,1,4,2]
-bi = inversions(bossanova, copy.copy(bossanova), 0, len(bossanova)-1)
-jazz = [2,4,5,3,1]
-ji = inversions(jazz, copy.copy(jazz), 0, len(jazz)-1)
+# rock = [3,2,4,1,5]
+# ri = inversions(rock, copy.copy(rock), 0, len(rock)-1)
+# bossanova = [3,5,1,4,2]
+# bi = inversions(bossanova, copy.copy(bossanova), 0, len(bossanova)-1)
+# jazz = [2,4,5,3,1]
+# ji = inversions(jazz, copy.copy(jazz), 0, len(jazz)-1)
 
-vi = sorted([(ri, 'rock'),(bi, 'bossa nova'),(ji, 'jazz')])
-print(vi)
-result = inversions(choices, copy.copy(choices), 0, len(choices)-1)
+# vi = sorted([(ri, 'rock'),(bi, 'bossa nova'),(ji, 'jazz')])
+# print(vi)
+# result = inversions(choices, copy.copy(choices), 0, len(choices)-1)
 
-print("Number of inversions are", result)
+# print("Number of inversions are", result)
