@@ -4,6 +4,7 @@ from algorithms import *
 from pygame import mixer
 from menu import openMenu
 
+
 def respawn():
     x = random.randint(1, 1200)
     y = random.randint(80, 640)
@@ -12,6 +13,7 @@ def respawn():
     if y == pos_player_y:
         y += 100
     return [x, y]
+
 
 class Player(pygame.sprite.Sprite):
 
@@ -125,6 +127,7 @@ close = closest(P)
 
 play = True
 game_over = False
+home = True
 player = Player()
 
 points = 0
@@ -161,7 +164,25 @@ def game_over_screen():
                 waiting = False
 
 
+def home_screen():
+    home = pygame.image.load('images/home.png').convert_alpha()
+    home = pygame.transform.scale(home, (1280, 720))
+    screen.blit(home, (0, 0))
+    pygame.display.flip()
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            key = pygame.key.get_pressed()
+            if key[pygame.K_p]:
+                waiting = False
+
+
 while play:
+    if home:
+        home_screen()
+        home = False
     if game_over:
         game_over_screen()
         game_over = False
