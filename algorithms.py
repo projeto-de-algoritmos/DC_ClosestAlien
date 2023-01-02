@@ -4,46 +4,46 @@ import copy
 import sys
 sys.setrecursionlimit(100000)
 
-def getMedians(choicesay):
-	blocks = [choicesay[i:i+5] for i in range(0, len(choicesay), 5)]
+def getMedians(choices):
+	blocks = [choices[i:i+5] for i in range(0, len(choices), 5)]
 	sortedBlocks = [sorted(block) for block in blocks]
 	medians = [block[len(block)//2] for block in sortedBlocks]
 	return medians
 
-def chosePivot(choicesay, k):
-	medians = getMedians(choicesay)
+def chosePivot(choices, k):
+	medians = getMedians(choices)
 	# median of medians
 	m = medians[len(medians)//2]
 	return m
 
-def partition(choicesay, m):
+def partition(choices, m):
 	start = 0
-	end = len(choicesay) - 1
+	end = len(choices) - 1
 	i = 0
 
 	while i <= end:
-		if choicesay[i] == m:
+		if choices[i] == m:
 			i += 1
-		elif choicesay[i] < m:
-			choicesay[start], choicesay[i] = choicesay[i], choicesay[start]
+		elif choices[i] < m:
+			choices[start], choices[i] = choices[i], choices[start]
 			start += 1
 			i += 1
 		else:
-			choicesay[end], choicesay[i] = choicesay[i], choicesay[end]
+			choices[end], choices[i] = choices[i], choices[end]
 			end -= 1
 
 	return start
 
-def medianOfMedians(choicesay, k):
-	m = chosePivot(choicesay, k)
-	start = partition(choicesay, m)
+def medianOfMedians(choices, k):
+	m = chosePivot(choices, k)
+	start = partition(choices, m)
 
 	if start == (k):
 		return m
 	elif start > (k):
-		return medianOfMedians(choicesay[0:start], k)
+		return medianOfMedians(choices[0:start], k)
 	else:
-		return medianOfMedians(choicesay[start + 1:len(choicesay)], k - start - 1)
+		return medianOfMedians(choices[start + 1:len(choices)], k - start - 1)
 
 # vetor = [2,5,9,19,24,54,5,87,9,10,44,32,18,13,2,4,23,26,16,19,25,39,47,56,71]
 vetor = [(random.random()*100*random.random()*100*random.random()*100) for i in range(1000000)]
@@ -104,17 +104,24 @@ def closest(points):
     y = sorted(points, key=lambda point: point[1])
     return rec(x, y)
   
+def calculateInversions(choices, map):
+    numbers = []
 
-def inversions(choices, aux, start, end):
+    for choice in choices:
+        numbers.append(map[choice])
+        
+    return _calculateInversions(numbers, copy.copy(numbers), 0, len(numbers)-1)
+
+def _calculateInversions(choices, aux, start, end):
     inversions_counter = 0
   
     if start < end:
         mid = (start + end)//2
 
         #rA
-        inversions_counter += inversions(choices, aux, start, mid)
+        inversions_counter += _calculateInversions(choices, aux, start, mid)
         #rB
-        inversions_counter += inversions(choices, aux, mid + 1, end)
+        inversions_counter += _calculateInversions(choices, aux, mid + 1, end)
         #r
         inversions_counter += merge(choices, aux, start, mid, end)
 
@@ -149,27 +156,3 @@ def merge(choices, aux, start, mid, end):
           
     return inversions_counter
   
-# instrumentos = [
-#     'baixo'
-#     , 'bateria'
-#     , 'violão'
-#     , 'guitarra'
-#     , 'violino'
-# ]
-# choices = []
-# for i in range(5):
-#     print(f'O quanto você gosta de {instrumentos[i]}?')
-#     choices.append(input())
-
-# rock = [3,2,4,1,5]
-# ri = inversions(rock, copy.copy(rock), 0, len(rock)-1)
-# bossanova = [3,5,1,4,2]
-# bi = inversions(bossanova, copy.copy(bossanova), 0, len(bossanova)-1)
-# jazz = [2,4,5,3,1]
-# ji = inversions(jazz, copy.copy(jazz), 0, len(jazz)-1)
-
-# vi = sorted([(ri, 'rock'),(bi, 'bossa nova'),(ji, 'jazz')])
-# print(vi)
-# result = inversions(choices, copy.copy(choices), 0, len(choices)-1)
-
-# print("Number of inversions are", result)

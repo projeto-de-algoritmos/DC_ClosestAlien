@@ -1,6 +1,8 @@
 import pygame
 import random
 from algorithms import *
+from pygame import mixer
+from menu import openMenu
 
 class Player(pygame.sprite.Sprite):
 
@@ -41,8 +43,23 @@ class Player(pygame.sprite.Sprite):
                 self.current_Missileimage= pygame.transform.scale(self.Missileimages[3], (25,25))
             self.direction = direction
 
+musicGenre = openMenu()[0][0]
+print(musicGenre)
 
 pygame.init()
+mixer.init()
+
+select = {
+    'Bossa Nova': 'bossanova'
+    , 'Dubstep': 'dubstep'
+    , 'Hip Hop': 'hiphop'
+    , 'Jazz': 'jazz'
+    , 'Pop': 'pop'
+    , 'Rock': 'rock'
+}
+mixer.music.load(f'./songs/{select[musicGenre]}.mp3')
+mixer.music.set_volume(0.3)
+mixer.music.play(-1)
 
 x = 1280
 y = 720
@@ -312,8 +329,12 @@ while play:
     x -= 0.5 #Background Movement
     
     
-    score = font.render(f'Score: {int(points)}',True,(0,0,0))
+    font = pygame.font.Font('freesansbold.ttf', 50)
+    score = font.render(f'SCORE: {int(points)}',True,(0,0,0))
     screen.blit(score,(50,50))
+    font = pygame.font.Font('freesansbold.ttf', 20)
+    music = font.render(f'Gênero escolhido: {musicGenre}',True,(0,0,0))
+    screen.blit(music,(50,100))
 
     pygame.draw.rect(screen,(255,0,0), player_rect,4)
     if close[0] != None:
