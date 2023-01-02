@@ -1,27 +1,13 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
+# Alienígenas
 
-Temas:
- - Grafos1
- - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
- 
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
-# NomedoProjeto
-
-**Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Número da Lista**: Dupla 3<br>
+**Conteúdo da Disciplina**: Dividir e Conquistar (D&C)<br>
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 19/0089792  |  João Victor Correia de Oliveira |
+| 19/0020601  |  Victor Buendia Cruz de Alvim |
 
 ## Sobre 
 Descreva os objetivos do seu projeto e como ele funciona. 
@@ -30,17 +16,13 @@ Descreva os objetivos do seu projeto e como ele funciona.
 Adicione 3 ou mais screenshots do projeto em funcionamento.
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+**Linguagem**: Python<br>
+**Framework**: Pygame<br>
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+Para rodar o projeto, iremos criar um ambiente virtual do python para instalar o pygame e depois rodar o nosso joguinho. Abra seu terminal e rode o seguinte comando:
 ```
-	python3 -m venv .pv
-	&& source .pv/bin/activate
-	&& pip3 install requirements.txt
-	&& python3 main.py
+	python3 -m venv .pv && source .pv/bin/activate && pip3 install -r requirements.txt && python3 main.py
 ```
 
 ## Outros 

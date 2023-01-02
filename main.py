@@ -42,7 +42,6 @@ class Player(pygame.sprite.Sprite):
             self.direction = direction
 
 
-
 pygame.init()
 
 x = 1280
