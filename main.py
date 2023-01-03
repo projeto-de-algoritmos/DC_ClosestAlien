@@ -8,10 +8,10 @@ from menu import openMenu
 def respawn():
     x = random.randint(1, 1200)
     y = random.randint(80, 640)
-    if x == pos_player_x:
-        x += 100
-    if y == pos_player_y:
-        y += 100
+    if (x >= (pos_player_x - 50)) and (x <= (pos_player_x + 50)):
+        x = respawn()[0]
+    if (y >= (pos_player_y - 50)) and (y <= (pos_player_y + 50)):
+        y = respawn()[1]
     return [x, y]
 
 
@@ -180,6 +180,8 @@ def home_screen():
 
 
 while play:
+    if points < 0:
+        game_over = True
     if home:
         home_screen()
         home = False
@@ -189,10 +191,7 @@ while play:
         points = 0
         pos_player_x = 200
         pos_player_y = 300
-        vel_missile_x = 0
-        vel_missile_y = 0
-        pos_missile_x = 200
-        pos_missile_y = 300
+        pos_missile_x, pos_missile_y, vel_missile_x, vel_missile_y = respawnMissile()
         pos_alien_x = respawn()[0]
         pos_alien_y = respawn()[1]
         pos_alien2_x = respawn()[0]
