@@ -83,7 +83,7 @@ y = 720
 font = pygame.font.Font('fonts/Pixellari.ttf', 50,)
 
 screen = pygame.display.set_mode((x, y))
-pygame.display.set_caption("Navezinha")
+pygame.display.set_caption("Closest Aliens")
 
 bg = pygame.image.load('images/bg.png').convert_alpha()
 bg = pygame.transform.scale(bg, (x, y))
