@@ -75,7 +75,7 @@ select = {
     'Bossa Nova': 'bossanova', 'Dubstep': 'dubstep', 'Hip Hop': 'hiphop', 'Jazz': 'jazz', 'Pop': 'pop', 'Rock': 'rock'
 }
 mixer.music.load(f'./songs/{select[musicGenre]}.mp3')
-mixer.music.set_volume(0.3)
+mixer.music.set_volume(0.2)
 mixer.music.play(-1)
 
 x = 1280
