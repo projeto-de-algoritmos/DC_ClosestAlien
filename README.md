@@ -78,7 +78,7 @@ sudo yum install python3-tkinter
 Para rodar o projeto, iremos criar um ambiente virtual do python para instalar o pygame e depois rodar o nosso joguinho. Abra seu terminal e rode o seguinte comando:
 
 ```
-	python3 -m venv .pv && source .pv/bin/activate && pip3 install -r requirements.txt && python3 main.py
+python3 -m venv .pv && source .pv/bin/activate && pip3 install -r requirements.txt && python3 main.py
 ```
 
 ## Outros 
