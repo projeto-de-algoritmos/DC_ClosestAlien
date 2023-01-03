@@ -31,6 +31,15 @@ Dessa forma, o gênero com menor número de inversões comparado à ordenação 
 
 ![Escolha da Música](/images/musica.png)
 
+## Vídeo de Apresentação
+(O vídeo em qualidade cheia pode ser encontrado na pasta [apresentacao](https://github.com/projeto-de-algoritmos/DC_ClosestAlien/tree/master/apresentacao) ou ser baixado clicando [aqui](https://github.com/projeto-de-algoritmos/DC_ClosestAlien/raw/master/apresentacao/apresentacao.mp4))
+
+
+https://user-images.githubusercontent.com/74838603/210292193-e24716c6-8e63-4842-8d51-ffb5355c9789.mp4
+
+
+
+
 ## Instalação 
 **Linguagem**: Python<br>
 **Framework**: Pygame e Tkinter<br>
