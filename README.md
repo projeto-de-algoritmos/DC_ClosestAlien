@@ -23,13 +23,13 @@ A movimentação da nave é feita usando as setinhas do teclado e o tiro do mís
 Dessa forma, o gênero com menor número de inversões comparado à ordenação feita pelo usuário é selecionado para ser a música tema do jogo!
 
 ## Screenshots
-![Tela Inicial]('/images/homescreen.png')
+![Tela Inicial](/images/homescreen.png)
 
-![Jogo]('/images/jogo.png')
+![Jogo](/images/jogo.png)
 
-![Tela Game Over]('/imagens/gameoverscreen.png')
+![Tela Game Over](/images/gameoverscreen.png)
 
-![Escolha da Música]('/images/musica.png')
+![Escolha da Música](/images/musica.png)
 
 ## Instalação 
 **Linguagem**: Python<br>
