@@ -14,7 +14,7 @@ O projeto **Closest Aliens** é um jogo simples feito com Pygame para a utiliza�
 
 No jogo, você é uma nave espacial que precisa ir eliminando os alienígenas em ovnis usando seus mísseis. Como os aliens possuem uma capacidade de reagir rapidamente, você precisa sempre eliminar os dois aliens mais próximos, para impedir que eles consigam espalhar a mensagem de ataque para os outros.
 
-Se você tocar em algum alienígena sem querer, o jogo acaba! Se você atirar em algum alienígena que não está marcado (os comparsas mais próximos), você perde ponto.
+Se você tocar em algum alienígena sem querer, o jogo acaba! Se você atirar em algum alienígena que não está marcado (os comparsas mais próximos), você perde ponto. CUIDADO: Se você alcançar uma pontuação negativa nos primeiros segundos do jogo, você também perde!
 
 A movimentação da nave é feita usando as setinhas do teclado e o tiro do míssil é feito usando a barra de espaço.
 
